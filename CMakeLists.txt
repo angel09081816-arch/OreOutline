@@ -12,7 +12,7 @@ set(MOD_NAME "OreOutline" CACHE STRING "LeviLauncher display name")
 set(MOD_AUTHOR "OreOutline contributors" CACHE STRING "Mod author")
 set(MOD_VERSION "0.1.0" CACHE STRING "Mod version")
 set(MOD_LIBRARY_NAME "ore_outline" CACHE STRING "Native library name")
-set(MOD_MINECRAFT_VERSIONS "[\"1.26.50\"]" CACHE STRING "Minecraft versions declared in the manifest")
+set(MOD_MINECRAFT_VERSIONS "[\"1.26.50.4\"]" CACHE STRING "Minecraft versions declared in the manifest")
 set(MOD_ICON "" CACHE STRING "Optional package-relative icon")
 
 include(FetchContent)

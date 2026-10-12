@@ -6,7 +6,7 @@ OreOutline is an ARM64 LeviLauncher native-mod project targeting Minecraft Bedro
 
 The package scaffold, loader registration, persisted settings, and ARM64 build are implemented. Ore detection and through-block outlines are **not implemented**. The verified `preloader-android` 0.2.2 public SDK has generic function/signature hooks and 2D HUD draw commands, but no public world/block read API or depth-tested world-space renderer. A 2D HUD overlay cannot provide reliable ore positions or through-wall 3D outlines. This project does not use invented memory offsets or unverified game signatures.
 
-The manifest declares Minecraft 1.26.50 as the intended target; successful compilation does not establish in-game compatibility. The settings below are saved for future implementation and do not currently cause scanning or rendering.
+The manifest declares Minecraft 1.26.50.4 as the intended target using LeviLaunchroid's exact-version format; successful compilation does not establish in-game compatibility. The settings below are saved for future implementation and do not currently cause scanning or rendering.
 
 ## Settings
 
@@ -22,7 +22,7 @@ export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.2.13676358"
 bash scripts/build.sh arm64-v8a
 ```
 
-The package is written to `build-arm64-v8a/ore_outline-0.1.0-arm64-v8a.levipack`. GitHub Actions runs the same build and uploads the `.levipack` as an artifact.
+The package is written to `build-arm64-v8a/ore_outline-0.1.0-arm64-v8a.levipack`. GitHub Actions runs the same build and uploads the `.levipack` as the `OreOutline-arm64-v8a-mc-1.26.50.4` artifact.
 
 ## Install In LeviLauncher
 
@@ -31,5 +31,6 @@ Import the `.levipack` file from LeviLauncher's mod manager/import screen, enabl
 ## Verified Upstream References
 
 - [Android native-mod template](https://github.com/QYCottage/levilauncher-android-mod-template)
+- [LeviLaunchroid native-mod compatibility rules](https://github.com/LiteLDev/LeviLaunchroid/blob/main/docs/guide/developer.md#manifestjson)
 - [PreLoader Android SDK 0.2.2](https://github.com/LiteLDev/preloader-android/tree/0.2.2)
 - [LeviLauncher](https://github.com/LiteLDev/LeviLauncher)

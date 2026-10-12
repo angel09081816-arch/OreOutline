@@ -25,6 +25,7 @@ cmake -S "$root_dir" -B "$root_dir/build-$abi" -G Ninja \
     -DANDROID_ABI="$abi" \
     -DANDROID_PLATFORM=android-28 \
     -DANDROID_STL=c++_shared \
+    -DMOD_MINECRAFT_VERSIONS='["1.26.50.4"]' \
     -DLEVI_PACKAGE_CONFIG_DIR="$root_dir/build-config-ninja/generated-config"
 cmake --build "$root_dir/build-$abi" --target levi_package
 
