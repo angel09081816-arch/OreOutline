@@ -25,6 +25,7 @@ class OreOutlineMod {
     ll::mod::NativeMod &mSelf;
     OreOutlineConfig mConfig;
     std::optional<pl::config::ConfigFile<OreOutlineConfig>> mConfigFile;
+    bool mStatusOverlayRegistered = false;
 };
 
 } // namespace ore_outline

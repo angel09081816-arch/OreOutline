@@ -1,8 +1,17 @@
 #include "mod/OreOutlineMod.h"
 
+#include <array>
 #include <filesystem>
 
+#include <pl/ModMenu.hpp>
+
 namespace ore_outline {
+
+namespace {
+
+constexpr char kStatusModuleId[] = "ore_outline_status";
+
+} // namespace
 
 OreOutlineMod &OreOutlineMod::instance() {
     static OreOutlineMod instance;
@@ -36,16 +45,45 @@ bool OreOutlineMod::enable() {
         return true;
     }
 
+    auto statusModule =
+        pl::modmenu::ModuleBuilder(kStatusModuleId, "OreOutline Status")
+            .description("Shows whether ore scanning is available.")
+            .defaultEnabled(true);
+    if (!statusModule.registerModule()) {
+        getSelf().getLogger().error("Could not register OreOutline status overlay");
+        return false;
+    }
+    mStatusOverlayRegistered = true;
+
+    const std::array statusCommands{
+        pl::modmenu::DrawCommand{
+            .type = pl::modmenu::DrawCommandType::Text,
+            .x = 12.0F,
+            .y = 12.0F,
+            .color = 0xFFFFFFFFU,
+            .size = 16.0F,
+            .text = "OreOutline: ore scanning unavailable",
+        },
+    };
+    pl::modmenu::submitDrawCommands(kStatusModuleId, statusCommands);
     getSelf().getLogger().warn(
-        "Ore scanning is not active: the verified Android SDK exposes no world/block read API or depth-tested world renderer");
+        "Ore scanning is unavailable: Preloader exposes no world/block read API or world-space renderer");
     return true;
 }
 
 bool OreOutlineMod::disable() {
+    if (mStatusOverlayRegistered) {
+        pl::modmenu::unregisterModule(kStatusModuleId);
+        mStatusOverlayRegistered = false;
+    }
     return true;
 }
 
 bool OreOutlineMod::unload() {
+    if (mStatusOverlayRegistered) {
+        pl::modmenu::unregisterModule(kStatusModuleId);
+        mStatusOverlayRegistered = false;
+    }
     mConfigFile.reset();
     return true;
 }

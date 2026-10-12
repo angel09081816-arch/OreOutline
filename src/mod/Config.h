@@ -34,7 +34,7 @@ nlohmann::json makeConfigSchemaJson();
 
 template <> struct pl::config::Schema<ore_outline::OreOutlineConfig> {
     static constexpr std::string_view title = "OreOutline Settings";
-    static constexpr std::string_view description = "Detection settings are saved, but ore scanning is not available in the verified SDK.";
+    static constexpr std::string_view description = "Detection settings are saved; scanning is unavailable in the verified SDK.";
 
     static constexpr pl::config::FieldSchema field(std::string_view name) {
         if (name == "version")
